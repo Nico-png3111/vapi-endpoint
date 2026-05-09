@@ -30,7 +30,8 @@ app.get('/', (req, res) => {
 
 app.post('/check-availability', async (req, res) => {
   try {
-    const toolCall = req.body?.message?.toolCallList?.[0];
+    const toolCall = req.body?.message?.toolCallList?.[0];:console.log("BODY RECIBIDO:", JSON.stringify(req.body));
+console.log("TOOL CALL:", JSON.stringify(toolCall));
     if (!toolCall) return res.status(400).json({ error: 'No toolCall encontrado' });
 
     const args = JSON.parse(toolCall.function.arguments);
