@@ -72,10 +72,11 @@ app.post('/check-availability', async (req, res) => {
     const maxReserved = nights.length > 0 ? Math.max(...nights.map(n => n.reserved)) : 0;
     const minAvailable = nights.length > 0 ? Math.min(...nights.map(n => n.available)) : inventory;
 
-    res.json({
+    res.status(200).json({
       results: [{
         toolCallId: toolCall.id,
         result: {
+          ok: true,
           roomType, inventory,
           range: { startDate, endDate },
           nights, maxReserved, minAvailable,
