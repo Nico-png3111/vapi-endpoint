@@ -73,6 +73,21 @@ console.log("TOOL CALL:", JSON.stringify(toolCall));
     const maxReserved = nights.length > 0 ? Math.max(...nights.map(n => n.reserved)) : 0;
     const minAvailable = nights.length > 0 ? Math.min(...nights.map(n => n.available)) : inventory;
 
+    const responseBody = {
+  results: [{
+    toolCallId: toolCall.id,
+    result: {
+      ok: true,
+      roomType, inventory,
+      range: { startDate, endDate },
+      nights, maxReserved, minAvailable,
+      isAvailableForEntireRange: minAvailable > 0
+    }
+  }]
+};
+console.log("RESPONDIENDO:", JSON.stringify(responseBody));
+return res.status(200).json(responseBody);
+    
     res.status(200).json({
       results: [{
         toolCallId: toolCall.id,
